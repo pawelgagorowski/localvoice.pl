@@ -1,0 +1,720 @@
+.container {
+  margin-top: 20px;
+}
+.btn.btn-primary.btn-margin {
+  height: 50px;
+  margin-left: 30px;
+}
+.category {
+}
+.lesson {
+  margin-left: 20px !important;
+}
+.word {
+  margin-left: 60px !important;
+}
+[class*="-words-example"] {
+  margin-left: 90px !important;
+}
+
+.words-examples {
+  margin-left: 90px !important;
+}
+
+
+.form-group .col-sm-10 {
+  float: none !important;
+  padding-left: 0;
+}
+
+.form-group .control-label {
+  margin-left: 0 !important;
+}
+
+.form-control {
+  margin-bottom: 7px;
+}
+
+.words-examples input[type=text]:focus {
+  background-color: lightblue;
+}
+
+.part-of-the-speech {
+  width: 50%;
+}
+
+.part-of-the-speech select {
+  width: 100%;
+}
+
+.words-examples {
+  margin-bottom: 50px;
+}
+
+.english-word-example input {
+  background-color: #39CCCC;
+}
+
+/* style dla sentencji */
+
+.form-inline.sentences label {
+display: block
+}
+
+.form-inline.sentences label {
+font-size: 11px;
+}
+
+.form-inline.sentences input.form-control {
+margin-right: 4px;
+}
+
+.form-inline.sentences .form-group {
+width: 27%;
+}
+
+.form-inline.sentences .form-control {
+width: 100%;
+}
+
+.sentence-container {
+margin-bottom: 45px;
+}
+
+.sentence-container:nth-child(0) {
+margin-top: 42px;
+}
+
+.all-word-sentence-button {
+  margin-left: 25%;
+  margin-top: 20px;
+}
+
+/* style dla chatu */
+
+.form-inline.chat label {
+display: block;
+}
+
+.chat-description {
+display: block;
+}
+
+.english-chat-description input, .polish-chat-description input {
+width: 100% !important;
+}
+
+.one-chat-row label {
+font-size: 12px;
+}
+
+.complex-chat-roll .form-group {
+width: 30%;
+}
+
+.complex-chat-roll .form-group input {
+width: 100%;
+}
+
+.chat-instruction, .all-the-rools {
+margin-left: 15% !important;
+}
+
+.one-chat-row {
+margin-bottom: 30px;
+}
+.english-user-group input, .english-google-group input {
+background-color: #7FDBFF;
+}
+
+.all-the-rools .form-control {
+margin-left: 7px;
+}
+
+.form-inline.challenge label {
+display: block;
+}
+
+.english-user-group, .english-google-group, .polish-google-group, .polish-user-group {
+  width: 45% !important;
+}
+
+.english-role-user-input, .polish-role-user-input, .english-role-google-input, .polish-role-google-input {
+  width: 97% !important;
+}
+
+
+
+
+
+/* style dla wyzwania */
+
+.one-challenge {
+width: 33%;
+float: left;
+padding-bottom: 30px;
+}
+
+.one-challenge input {
+width: 100%;
+}
+
+.english-challenge-group, .polish-challenge-group {
+width: 97%;
+}
+
+.english-challenge-group input, .polish-challenge-group input {
+width: 100% !important;
+}
+
+.chat-buttons {
+clear: left;
+}
+
+.one-challenge .english-challenge-group input {
+background-color: #FF851B;
+}
+
+.challenge .chat-buttons {
+  margin-left: 25%
+}
+
+ /* Przyciski */
+
+ /* Style ogólne */
+ button.btn, input[type=button], input[type=submit], input[type=reset] {
+ border: none;
+ color: white;
+ padding: 16px 32px;
+ text-decoration: none;
+ margin-top: 0 2px;
+ cursor: pointer;
+ }
+
+
+ /* przycisk do zaousywania */
+ button.save-data-button {
+  position: relative;
+  background-color: #4CAF50;
+  border: none;
+  font-size: 28px;
+  color: #FFFFFF;
+  padding: 5px 30px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+button.save-data-button:after {
+  content: "";
+  background: #f1f1f1;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -40px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+button.save-data-button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
+  background-color: #4CAF50 !important;
+}
+
+button.save-data-button:hover {
+  color: white;
+  background-color: #4CAF50 !important;
+}
+
+/* button.save-data-button:active {
+  background-color: #4CAF50 !important;
+} */
+
+button.save-data-button:focus {
+  background-color: #4CAF50 !important;
+  color: white
+}
+
+.add-examples-button {
+background-color: #4CAF50;
+margin-left: 80px !important;
+}
+
+.add-examples-button:focus {
+background-color: #4CAF50;
+color: white;
+}
+
+.remove-examples-button {
+background-color: #FF2800;
+}
+
+.remove-examples-button:focus {
+background-color: #FF2800;
+color: white;
+}
+
+.remove-word-button {
+background-color: #B6C61A;
+}
+
+.remove-word-button:focus {
+background-color: #B6C61A;
+color: white;
+}
+
+.new-word-button {
+  margin-left: 25%;
+  background: #1261A0;
+}
+
+.new-word-button:focus {
+  background: #1261A0;
+  color: white
+}
+
+.add-phrase-button {
+background-color: #4CAF50;
+padding: 12px 6px !important;
+margin-right: 4px;
+}
+
+.add-phrase-button:focus {
+background-color: #4CAF50 !important;
+color: white;
+}
+
+.remove-phrase-button {
+background-color: #FF2800;
+padding: 12px 6px !important;
+}
+
+.remove-phrase-button:focus {
+background-color: #FF2800 !important;
+color: white;
+}
+
+.add-challenge-button {
+background-color: #4CAF50;
+}
+
+.add-challenge-button:focus {
+background-color: #4CAF50;
+color: white
+}
+
+.remove-challenge-button {
+background-color: #FF2800;
+}
+
+.remove-challenge-button:focus {
+background-color: #FF2800;
+color: white;
+}
+
+
+.save-data-button {
+  background-color: #4CAF50;
+}
+
+.save-page-button {
+  background-color: #7FDBFF;
+}
+
+.save-page-button {
+  background-color: #7FDBFF;
+}
+
+.add-sentence-button {
+background-color: #4CAF50;
+margin: 4px 8px;
+}
+
+.add-sentence-button:focus {
+background-color: #4CAF50;
+color: white;
+}
+
+.remove-sentence-button {
+background-color: #FF2800;
+}
+
+.remove-sentence-button:focus {
+background-color: #FF2800;
+color: white;
+}
+
+.new-word-sentence-button {
+background-color: #4CAF50;
+}
+
+.new-word-sentence-button:focus {
+background-color: #4CAF50;
+color: white;
+}
+
+.remove-word-sentence-button {
+background-color: #FF2800;
+}
+
+.remove-word-sentence-button:focus {
+background-color: #FF2800;
+color: white;
+}
+
+.add-chat-button {
+background-color: #4CAF50;
+}
+
+.add-chat-button:focus {
+background-color: #4CAF50;
+color: white;
+}
+
+.remove-chat-button {
+background-color: #FF2800;
+}
+
+.remove-chat-button:focus {
+background-color: #FF2800;
+color: white;
+}
+
+.verification-data-button {
+  background-color: #1261A0;
+  margin-top: 15px;
+}
+.verification-data-button:focus {
+  background-color: #1261A0;
+  color: white;
+}
+
+.verification-data-button:hover {
+  background-color: #1261A0;
+  color: white;
+}
+
+
+button.verification-data-button {
+ position: relative;
+ background-color: #1261A0;
+ border: none;
+ font-size: 28px;
+ color: #FFFFFF;
+ padding: 5px 30px;
+ text-align: center;
+ -webkit-transition-duration: 0.4s; /* Safari */
+ transition-duration: 0.4s;
+ text-decoration: none;
+ overflow: hidden;
+ cursor: pointer;
+}
+
+button.verification-data-button:after {
+ content: "";
+ background: #f1f1f1;
+ display: block;
+ position: absolute;
+ padding-top: 300%;
+ padding-left: 350%;
+ margin-left: -40px !important;
+ margin-top: -120%;
+ opacity: 0;
+ transition: all 0.8s
+}
+
+button.verification-data-button:active:after {
+ padding: 0;
+ margin: 0;
+ opacity: 1;
+ transition: 0s;
+ background-color: #4CAF50 !important;
+}
+
+
+
+/* ogólne dla formularzy */
+form {
+  margin-bottom: 100px !important;
+}
+
+/* pozycja fixed */
+.saving-buttons.fixed {
+  position: fixed !important;
+  bottom: 25px;
+  right: 30px;
+}
+
+.verification-button.fixed {
+  position: fixed !important;
+  bottom: 25px;
+  left: 30px !important;
+}
+
+/* Dodajemy popup do przycisku zapisywania */
+.save-popup-text.show {
+  visibility: visible !important;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .save-popup-text {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .save-popup-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+/* wiadomość popup - do ściagania zapisanych lekcji z bazy danych */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-for-words {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+
+}
+
+.close-for-words:hover,
+.close-for-words:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.lessons-list {
+  margin: 15px 15px;
+}
+
+.lessons-list p {
+  display: inline-block;
+  margin: 4px;
+}
+
+.one-line-lesson {
+  cursor: pointer;
+}
+
+.bold-class {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.base-for-synonym {
+  margin-right: 20px
+}
+
+/* SYNONIMY */
+
+.base-for-synonym-label {
+  margin-right: 10px;
+}
+
+.synonym-label {
+  margin-right: 10px;
+}
+
+.form-control {
+  display: block !important;
+}
+
+.add-synonym-button, .add-synonym-button:hover, .add-synonym-button:active {
+  background-color: #4CAF50;
+}
+
+.remove-synonym-button, .remove-synonym-button:hover, .remove-synonym-button:active {
+  background-color: #FF2800;
+}
+
+.all-the-synonyms, .synonym-buttons, .synonyms-instruction {
+  margin-left: 15% !important;
+}
+
+.send-synonym-button, .send-synonym-button:hover, .send-synonym-button:active {
+  background-color: #1261A0
+}
+
+.container-for-synonyms {
+  background-color: lightblue;
+}
+
+.form-inline.synonyms {
+  margin-bottom: 200px !important;
+}
+
+/* Words not available */
+
+.list-container-for-words {
+  position: fixed;
+  right: 0;
+  display: none;
+}
+
+.list-container-for-words.show {
+  position: fixed;
+  right: 0;
+  display: block;
+  top: 40px;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block;
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+
+.list-container-for-words h2 {
+  margin-top: 40px;
+}
+.special-li.hide {
+  display: none;
+}
+
+.special-li a {
+  background-color: white !important;
+}

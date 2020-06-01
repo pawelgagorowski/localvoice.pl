@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.auth0.com/js/auth0/9.10/auth0.min.js"></script>
+<!-- Latest minor release -->
+<script src="https://cdn.auth0.com/js/lock/11.x/lock.min.js"></script>
+
+<!-- Latest patch release (recommended for production) -->
+<script src="https://cdn.auth0.com/js/lock/11.x.y/lock.min.js"></script>
+<script type="module" src="../javascripts/results.js"></script>
+<style>
+
+  .image {
+    max-width: 90vw;
+  }
+
+  .success-color {
+    background-color: #00C851 !important;
+  }
+
+  .list-group-item {
+    overflow: hidden;
+    height: 100px;
+  }
+
+  .list-group-item img {
+    float: right;
+    height: 100px;
+    margin-top: -98px;
+
+  }
+
+  .container.winners {
+    margin-top: 30px;
+  }
+
+  .navbar-header img {
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+  }
+
+  .navbar-nav.navbar-right {
+    float: right;
+  }
+
+  #btn-login, #btn-logout {
+    margin-right: 10px;
+  }
+
+  .winners-name {
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+
+  @media (min-width: 768px) {
+    .container-fluid>.navbar-header {
+      width: 100%;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .winners-name {
+        font-size: 13px;
+        font-weight: bold;
+      }
+    }
+
+    .color {
+      background-color: lightblue !important;
+    }
+
+
+
+</style>
+<div class="content">
+  <nav class="navbar navbar-inverse">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <img src="https://s3.eu-central-1.amazonaws.com/testers.localvoice.pl/local_voice_full_color.png" alt="">
+    <ul class="nav navbar-nav navbar-right">
+      <!-- <li> <a href="#" class="email-display"></a>sdfvsdfs</li> -->
+      <li id="btn-login"><a href="#"><span class="glyphicon glyphicon-user"></span> Zaloguj się</a></li>
+      <li id="btn-logout"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Wyloguj się</a></li>
+    </ul>
+  </div>
+
+</div>
+</nav>
+</div>
+<div class="container winners">
+  <h3>Pełna lista uczestników rywalizacji</h3>
+  <p>Pierwsze 10 osób każdego miesiąca otrzyma bilety do kina. Powodzenia!</p>
+  <ul class="list-group">
+  </ul>
+</div>
+<div="image-container">
+  <img src="" alt="" class="image">
+</div>
+</html>
