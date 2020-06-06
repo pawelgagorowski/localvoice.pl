@@ -17,6 +17,10 @@
 <script type="module" src="../javascripts/results.js"></script>
 <style>
 
+  body {
+    overflow-x: hidden;
+  }
+
   .image {
     max-width: 90vw;
   }
@@ -32,9 +36,9 @@
 
   .list-group-item img {
     float: right;
-    height: 100px;
-    margin-top: -98px;
-
+    height: 93px;
+    margin-top: -96px;
+    border-radius: 50px;
   }
 
   .container.winners {
@@ -61,6 +65,10 @@
     font-weight: bold;
   }
 
+  .gift-image {
+    margin-right: 20%;
+  }
+
 
   @media (min-width: 768px) {
     .container-fluid>.navbar-header {
@@ -72,6 +80,16 @@
       .winners-name {
         font-size: 13px;
         font-weight: bold;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gift-image {
+        margin-right: 32%;
+      }
+      .list-group-item img {
+        height: 84px;
+        margin-top: -88px;
       }
     }
 

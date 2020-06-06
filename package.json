@@ -1,37 +1,11 @@
 {
   "name": "siteforenteringlessons",
   "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "autoprefixer": "postcss -u autoprefixer -r production/css/*.css",
-    "scss": "node-sass --output-style expanded --indent-width 4 -o production/css development/scss",
-    "uglify": "uglifyjs development/js/*.js -m -o production/js/scripts.js",
-    "serve": "browser-sync start --server --files \"production/css/*.css, production/js/*.js\"",
-    "build:css": "npm run scss && npm run autoprefixer",
-    "build:js": "npm run uglify",
-    "build:all": "npm run build:css && npm run build:js",
-    "watch:css": "onchange \"development/scss\" -- npm run build:css",
-    "watch:js": "onchange \"development/js\" -- npm run build:js",
-    "watch:all": "npm-run-all -p serve watch:css watch:js",
-    "start": "npm run build:all && npm run watch:all"
-  },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "jsonwebtoken": "^8.5.1",
-    "morgan": "~1.9.1",
-    "puppeteer": "^1.20.0"
-  },
-  "devDependencies": {
-    "node-sass": "^4.5.0",
-    "postcss-cli": "^3.0.0-beta",
-    "autoprefixer": "^6.7.6",
-    "browser-sync": "^2.18.8",
-    "npm-run-all": "^4.0.2",
-    "onchange": "^3.2.1",
-    "uglify-js": "^2.8.3"
+    "morgan": "~1.9.1"
   }
 }

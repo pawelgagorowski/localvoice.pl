@@ -187,14 +187,16 @@ function sortingFunction (response, email) {
   }
   console.log("sprawdzamy response")
   console.log(response)
-  const myData = response.sort(function (a,b) {
+  const users = response.results;
+  const winners = response.listOfWinners;
+  const sortedUsers = users.sort(function (a,b) {
     console.log(typeof a.result)
     return a.result - b.result
   })
 
 const $userList = $('.list-group');
     $userList.empty();
-    myData.forEach(function(item, i) {
+    sortedUsers.forEach(function(item, i) {
 
       const score = millisToMinutesAndSeconds(item.result);
       if(item.user) {
@@ -223,11 +225,22 @@ const $userList = $('.list-group');
         let j;
         j = i.toString();
         if(i > 9 ) {
-          j = j.charAt(0)
+          j = j.charAt(1)
         }
         $(image)
         .attr("src", item.picture ? item.picture : `https://d24xp1bilplfor.cloudfront.net/icons/${i}.png`)
         .appendTo(div)
+
+        const boolean = winners.every(function (el) {
+          return item._id != el
+        })
+        if(boolean) {
+          let giftImage = document.createElement("img");
+          $(giftImage)
+          .addClass('gift-image')
+          .attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/icons/gift.png")
+          .appendTo(div)
+        }
 
       } else {
         console.log("jesteśmy w else")
@@ -256,11 +269,22 @@ const $userList = $('.list-group');
         let j;
         j = i.toString();
         if(i > 9 ) {
-          j = j.charAt(0)
+          j = j.charAt(1)
         }
         $(image)
         .attr("src", `https://d24xp1bilplfor.cloudfront.net/icons/${j}.png`)
         .appendTo(div)
+
+        const boolean = winners.every(function (el) {
+          return item._id != el
+        })
+        if(boolean) {
+          let giftImage = document.createElement("img");
+          $(giftImage)
+          .addClass('gift-image')
+          .attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/icons/gift.png")
+          .appendTo(div)
+        }
       }
     });
     return
