@@ -4,6 +4,115 @@ window.addEventListener('load', function() {
   let expiresAt;
   let email;
 
+  let $firstPositionButton = $('#firstPosition');
+  let $secondPositionButton = $('#secondPosition');
+  let $month = $('.month');
+
+  const english_month_array = ["january", "february", "march", "april", "may", "june", "july", "august", 'september', 'october', 'november', 'december']
+  const polish_month_array = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", 'Wrzesień', 'Październik', 'Listopad', 'Grudzień']
+
+  function changeLanguageMonth(month) {
+    switch(month) {
+  case "january":
+    return "styczeń"
+    break;
+  case "february":
+    return "luty"
+    break;
+  case "march":
+    return "marzec"
+    break;
+  case "april":
+    return "kwiecień"
+    break;
+  case "may":
+    return "maj"
+    break;
+  case "june":
+    return "czerwiec"
+  break;
+  case "july":
+    return "lipiec"
+    break;
+  case "august":
+    return "sierpień"
+    break;
+  case "september":
+    return "wrzesień"
+    break;
+  case "october":
+    return "październik"
+  break;
+  case "november":
+    return "listopad"
+    break;
+  case "december":
+    return "grudzień"
+    break;
+  default:
+    return month
+}
+  }
+
+
+
+
+  $firstPositionButton.on('click', function () {
+    console.log("$firstPositionButton")
+    const tempToken = localStorage.getItem('token');
+    const token = JSON.parse(tempToken);
+    if (token && token.accessToken && token.idToken) {
+      localLogin(token, function(email, idToken) {
+        const month = getCurrentMonth("english")
+        retrievingResults(email, month, idToken);
+      });
+    }
+  })
+
+  $secondPositionButton.on('click', function () {
+    console.log("$secondPositionButton")
+    const tempToken = localStorage.getItem('token');
+    const token = JSON.parse(tempToken);
+    if (token && token.accessToken && token.idToken) {
+      localLogin(token, function(email, idToken) {
+        const month = getPreviousMonth("english")
+        retrievingResults(email, month, idToken);
+      });
+    }
+  })
+
+
+  function getCurrentMonth(language) {
+    const array = (language == "polish") ? polish_month_array : english_month_array;
+    const d = new Date();
+    const n = d.getMonth();
+
+    return array[n]
+  }
+
+  function getPreviousMonth(language) {
+    const array = (language == "polish") ? polish_month_array : english_month_array;
+    const d = new Date();
+    let n = d.getMonth();
+    if(n == 0) {
+      n = 11
+      return array[n]
+    } else {
+      return array[n-1]
+    }
+  }
+
+
+  function identifyMonth() {
+    const currentMonth = getCurrentMonth("polish");
+    const previousMonth = getPreviousMonth("polish")
+    $("#firstPosition").text(currentMonth);
+    $("#secondPosition").text(previousMonth);
+  }
+
+  identifyMonth();
+
+
   var webAuth = new auth0.WebAuth({
     domain: 'dev-6cnet9rr.eu.auth0.com',
     clientID: 'NqFkCbJy7V3RAsqgxqXm0g3mRgsmA6Dq',
@@ -28,7 +137,6 @@ window.addEventListener('load', function() {
    var logoutBtn = document.getElementById('btn-logout');
 
 
-
    logoutBtn.addEventListener('click', logout);
 
    function handleAuthentication() {
@@ -37,7 +145,8 @@ window.addEventListener('load', function() {
          console.log(authResult);
          window.location.hash = '';
          localLogin(authResult, function (email, idToken) {
-           retrievingResults(email, idToken)
+           const month = getCurrentMonth("english")
+           retrievingResults(email, month, idToken)
            displayButtons(email);
          });
          loginBtn.style.display = 'none';
@@ -76,7 +185,8 @@ window.addEventListener('load', function() {
        const token = JSON.parse(token1);
        if (token && token.accessToken && token.idToken) {
          localLogin(token, function(email, idToken) {
-           retrievingResults(email, idToken)
+           const month = getCurrentMonth("english")
+           retrievingResults(email, month, idToken)
            displayButtons(email);
          });
        } else {
@@ -108,184 +218,205 @@ window.addEventListener('load', function() {
      if (isAuthenticated()) {
        loginBtn.style.display = 'none';
        logoutBtn.style.display = 'inline-block';
+       $month.css("display", "block")
        displayParagraphs(true)
      } else {
        loginBtn.style.display = 'inline-block';
        logoutBtn.style.display = 'none';
+       $month.css("display", "none")
        displayParagraphs(false)
      }
    }
 
  if (localStorage.getItem('isLoggedIn') === 'true') {
   renewTokens();
-  displayButtons()
+  displayButtons();
   } else {
-  displayButtons()
+  displayButtons();
   handleAuthentication();
   }
 
-});
-
-
-function displayImage (statusCode) {
-  if(statusCode == 403) {
-    $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/pictures/dev/base+category/introduce+yourself/example-from-20.png")
-  } else {
-    $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/pictures/dev/base+category/introduce+yourself/example-from-20.png")
+  function displayImage (statusCode) {
+    console.log("displayImage")
+    if(statusCode == 403) {
+      $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/pictures/dev/base+category/introduce+yourself/example-from-20.png")
+    } else {
+      $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/pictures/dev/base+category/introduce+yourself/example-from-20.png")
+    }
   }
-}
 
 
-function retrievingResults(email, idToken) {
-  const status = location.href.split("=")[1]
-  const env = (!status || status == "prod") ? "prod" : "test"
-    $.ajax({
-      method: 'GET',
-      url: `https://api.localvoice.pl/learn/results?env=${env}`,
-      // url: `http://localhost:3000/test/results?env=${env}`,
-      headers: {
-        'Authorization': `${idToken}`,
-        'x-user': email,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-        }
-    })
-    .done(resp => {
-      console.log("result")
-      // const body = JSON.parse(resp.body)
-      sortingFunction(resp, email)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-}
-
-
-function displayParagraphs (boolean) {
-  if(boolean) {
-    $('.container.winners h3').text("Pełna lista uczestników rywalizacji")
-    $('.container.winners p').text("Pierwsze 10 osób każdego miesiąca otrzyma bilety do kina. Powodzenia!")
-  } else {
-    $('.list-group').empty();
-    $('.container.winners h3').text("Zaloguj się aby zobaczyć listę uczestników")
-    $('.container.winners p').text("")
+  function retrievingResults(email, month, idToken) {
+    const status = location.href.split("=")[1]
+    const env = (!status || status == "prod") ? "prod" : "test"
+    const $userList = $('.list-group');
+      $.ajax({
+        method: 'GET',
+        url: `https://api.localvoice.pl/learn/results?env=${env}&month=${month}`,
+        // url: `http://localhost:3000/test/results?env=${env}`,
+        headers: {
+          'Authorization': `${idToken}`,
+          'x-user': email,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+          }
+      })
+      .done(resp => {
+        $userList.empty();
+        console.log("result");
+        console.log(resp);
+        sortingFunction(resp, month, email);
+      })
+      .catch(err => {
+        $userList.empty();
+        sortingFunction(resp, month, email);
+      })
   }
-}
 
-function millisToMinutesAndSeconds(millis) {
-  const result = {};
-  result.minutes = Math.floor(millis / 60000);
-  result.seconds = ((millis % 60000) / 1000).toFixed(0);
-  result.minutes + (result.seconds < 10 ? '0' : '') + result.seconds;
-  return result;
-}
-
-function sortingFunction (response, email) {
-  if(response.statusCode) {
-    const statusCode = response.statusCode;
-    return displayImage(statusCode)
+  function displayParagraphs (boolean) {
+    if(boolean) {
+      $('.container.winners h3').text("Pełna lista uczestników rywalizacji")
+      $('.container.winners p').text("Pierwsze 20% osób każdego miesiąca otrzyma bilety do kina. Pamiętaj, że laureaci poprzedniego miesiąca nie są tym razem brani pod uwagę przy rozdzielaniu nagród. Dajmy szansę innym :) Powodzenia!")
+    } else {
+      $('.list-group').empty();
+      $('.container.winners h3').text("Zaloguj się aby zobaczyć listę uczestników")
+      $('.container.winners p').text("")
+    }
   }
-  console.log("sprawdzamy response")
-  console.log(response)
-  const users = response.results;
-  const winners = response.listOfWinners;
-  const sortedUsers = users.sort(function (a,b) {
-    console.log(typeof a.result)
-    return a.result - b.result
-  })
 
-const $userList = $('.list-group');
-    $userList.empty();
-    sortedUsers.forEach(function(item, i) {
+  function millisToMinutesAndSeconds(millis) {
+    const result = {};
+    result.minutes = Math.floor(millis / 60000);
+    result.seconds = ((millis % 60000) / 1000).toFixed(0);
+    result.minutes + (result.seconds < 10 ? '0' : '') + result.seconds;
+    return result;
+  }
 
-      const score = millisToMinutesAndSeconds(item.result);
-      if(item.user) {
-        let div = document.createElement('div');
-        $(div)
-        .addClass('list-group-item color')
-        .appendTo($userList)
-
-        let place = document.createElement("p")
-        $(place)
-        .text(`miejsce ${i+1}`)
-        .appendTo(div)
-
-        let name = document.createElement("p")
-        $(name)
-        .addClass('winners-name')
-        .text(`${item.given_name}`)
-        .appendTo(div)
-
-        let time = document.createElement("p")
-        $(time)
-        .text(`${score.minutes} min. i ${score.seconds} sek.`)
-        .appendTo(div)
-
-        let image = document.createElement("img")
-        let j;
-        j = i.toString();
-        if(i > 9 ) {
-          j = j.charAt(1)
-        }
-        $(image)
-        .attr("src", item.picture ? item.picture : `https://d24xp1bilplfor.cloudfront.net/icons/${i}.png`)
-        .appendTo(div)
-
-        const boolean = winners.every(function (el) {
-          return item._id != el
-        })
-        if(boolean) {
-          let giftImage = document.createElement("img");
-          $(giftImage)
-          .addClass('gift-image')
-          .attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/icons/gift.png")
-          .appendTo(div)
-        }
-
-      } else {
-        console.log("jesteśmy w else")
-        let div = document.createElement('div');
-        $(div)
-        .addClass('list-group-item')
-        .appendTo($userList)
-
-        let place = document.createElement("p")
-        $(place)
-        .text(`miejsce ${i+1}`)
-        .appendTo(div)
-
-        let name = document.createElement("p")
-        $(name)
-        .addClass('winners-name')
-        .text(`${item.given_name}`)
-        .appendTo(div)
-
-        let time = document.createElement("p")
-        $(time)
-        .text(`${score.minutes} min. i ${score.seconds} sek.`)
-        .appendTo(div)
-
-        let image = document.createElement("img")
-        let j;
-        j = i.toString();
-        if(i > 9 ) {
-          j = j.charAt(1)
-        }
-        $(image)
-        .attr("src", `https://d24xp1bilplfor.cloudfront.net/icons/${j}.png`)
-        .appendTo(div)
-
-        const boolean = winners.every(function (el) {
-          return item._id != el
-        })
-        if(boolean) {
-          let giftImage = document.createElement("img");
-          $(giftImage)
-          .addClass('gift-image')
-          .attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/icons/gift.png")
-          .appendTo(div)
-        }
+  function sortingFunction (response, month, email) {
+    try {
+      if(response.statusCode) {
+        const statusCode = response.statusCode;
+        return displayImage(statusCode)
       }
-    });
-    return
-}
+      console.log("sprawdzamy response")
+      console.log(response)
+      const users = response.results;
+      const winners = response.listOfWinners;
+      const sortedUsers = users.sort(function (a,b) {
+        console.log(typeof a.result)
+        return a.result - b.result
+      })
+
+      const $userList = $('.list-group');
+
+        console.log("$userList")
+        $userList.empty();
+        const h3 = document.createElement('h3');
+        let properMonth = changeLanguageMonth(month)
+        $(h3)
+        .text(`Pełna lista uczestników rywalizacji dla miesiąca ${properMonth}`)
+        .appendTo($userList)
+
+        const p = document.createElement('p');
+        $(p)
+        .html("Pierwsze <span class='big-letters'> 20% </span> osób każdego miesiąca otrzyma  <span class='big-letters'> bilety do kina/pizzę </span>. Pamiętaj, że laureaci poprzedniego miesiąca nie są tym razem brani pod uwagę przy rozdzielaniu nagród. Dajmy szansę innym :) Powodzenia!")
+        .appendTo($userList)
+
+        sortedUsers.forEach(function(item, i) {
+
+          const score = millisToMinutesAndSeconds(item.result);
+          if(item.user) {
+            let div = document.createElement('div');
+            $(div)
+            .addClass('list-group-item color')
+            .appendTo($userList)
+
+            let place = document.createElement("p")
+            $(place)
+            .text(`miejsce ${i+1}`)
+            .appendTo(div)
+
+            let name = document.createElement("p")
+            $(name)
+            .addClass('winners-name')
+            .text(`${item.given_name}`)
+            .appendTo(div)
+
+            let time = document.createElement("p")
+            $(time)
+            .text(`${score.minutes} min. i ${score.seconds} sek.`)
+            .appendTo(div)
+
+            let image = document.createElement("img")
+            let j;
+            j = i.toString();
+            if(i > 9 ) {
+              j = j.charAt(1)
+            }
+            $(image)
+            .attr("src", item.picture ? item.picture : `https://d24xp1bilplfor.cloudfront.net/icons/${i}.png`)
+            .appendTo(div)
+
+            const boolean = winners.every(function (el) {
+              return item._id != el
+            })
+            if(boolean) {
+              let giftImage = document.createElement("img");
+              $(giftImage)
+              .addClass('gift-image')
+              .attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/icons/gift.png")
+              .appendTo(div)
+            }
+
+          } else {
+            console.log("jesteśmy w else")
+            let div = document.createElement('div');
+            $(div)
+            .addClass('list-group-item')
+            .appendTo($userList)
+
+            let place = document.createElement("p")
+            $(place)
+            .text(`miejsce ${i+1}`)
+            .appendTo(div)
+
+            let name = document.createElement("p")
+            $(name)
+            .addClass('winners-name')
+            .text(`${item.given_name}`)
+            .appendTo(div)
+
+            let time = document.createElement("p")
+            $(time)
+            .text(`${score.minutes} min. i ${score.seconds} sek.`)
+            .appendTo(div)
+
+            let image = document.createElement("img")
+            let j;
+            j = i.toString();
+            if(i > 9 ) {
+              j = j.charAt(1)
+            }
+
+            $(image)
+            .attr("src", item.picture ? item.picture : `https://d24xp1bilplfor.cloudfront.net/icons/${j}.png`)
+            .appendTo(div)
+
+            const boolean = winners.every(function (el) {
+              return item._id != el
+            })
+            if(boolean) {
+              let giftImage = document.createElement("img");
+              $(giftImage)
+              .addClass('gift-image')
+              .attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/icons/gift.png")
+              .appendTo(div)
+            }
+          }
+        });
+        return
+    } catch(e) {
+      console.log(e)
+    }
+  }
+});

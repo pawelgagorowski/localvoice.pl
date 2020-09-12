@@ -718,3 +718,7 @@ form {
 .special-li a {
   background-color: white !important;
 }
+
+.month {
+  display: none;
+}

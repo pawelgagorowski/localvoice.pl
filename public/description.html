@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Latest patch release (recommended for production) -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.auth0.com/js/lock/11.x.y/lock.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Roboto:700');
+
+body {
+  margin:0px;
+  font-family:'Roboto';
+  text-align:center;
+}
+
+#container {
+  color:#999;
+  text-transform: uppercase;
+  font-size:36px;
+  font-weight:bold;
+  padding-top:40px;
+  display:block;
+}
+
+#flip {
+  height:50px;
+  overflow:hidden;
+}
+
+#flip > div > div {
+  color:#fff;
+  padding:4px 12px;
+  height:45px;
+  margin-bottom:45px;
+  display:inline-block;
+}
+
+#flip div:first-child {
+  animation: show 5s linear infinite;
+}
+
+#flip div div {
+  background:#42c58a;
+}
+#flip div:first-child div {
+  background:#4ec7f3;
+}
+#flip div:last-child div {
+  background:#DC143C;
+}
+.normal-text {
+  font-size:14px;
+  color:#999;
+}
+.words {
+  text-align: left;
+  margin-top: 55px;
+}
+
+@keyframes show {
+  0% {margin-top:-270px;}
+  5% {margin-top:-180px;}
+  33% {margin-top:-180px;}
+  38% {margin-top:-90px;}
+  66% {margin-top:-90px;}
+  71% {margin-top:0px;}
+  99.99% {margin-top:0px;}
+  100% {margin-top:-270px;}
+}
+
+
+.blue {
+  background:#4ec7f3;
+  color:white;
+}
+
+.green {
+  background:#42c58a;
+  color:white;
+}
+
+.red {
+  background:#DC143C;
+  color: white;
+}
+
+.big-margin {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+.small-margin {
+  margin-top: 10px;
+}
+.orange {
+  background: #FF851B;
+  color: white;
+}
+.footer {
+  height: 50px;
+}
+
+@media (max-width: 768px) {
+  #container {
+    margin: 0 20px;
+    font-size:30px;
+  }
+}
+
+
+</style>
+<div id=container class="container">
+  <div class="">
+    Usz się
+  </div>
+  języków z
+  <div id=flip>
+    <div><div>nagrodami</div></div>
+    <div><div>przyjemnością</div></div>
+    <div><div>pasją</div></div>
+  </div>
+  <p class="normal-text big-margin">
+    Local voice to aplikacja do nauki języków, gdzie co miesiąc możesz konkurować z innymi <span class="blue">o nagrody</span>
+  </p>
+  <p class="normal-text big-margin">
+    wystarczy, że się zalogujesz i weźmiesz udział w miesięcznym wyzwaniu, czyli <span class="green">Monthly challenge</span>, który dotyczy jednego z kategorii. kategoria zmienia się co miesiąc.
+  </p>
+  <p class="normal-text big-margin">
+    pamiętaj, aby się dobrze przygotować przed takim wyzwaniem, bo liczba prób jest ograniczona. Po to są <span class="red">lekcje</span> i <span class="blue">wyzwania do lekcji</span>.
+  </p>
+  <p class="normal-text big-margin">
+    Jeśli nie jesteś biegły w danym języku, to poniższe wskazówki pomoga Ci w <span class="green">nawigowaniu</span> po aplikacji:
+  </p>
+  <div class="words">
+    <p class="normal-text small-margin"><span class="orange">list of categories</span> - lista kategorii</p>
+    <p class="normal-text small-margin"><span class="orange">list of lesson</span> - lista lekcji</p>
+    <p class="normal-text small-margin"><span class="orange">next</span> - przejdź dalej (bez odpowiadania)</p>
+    <p class="normal-text small-margin"><span class="orange">next and report</span> - przejdź dalej (bez odpowiadania) i zaraportuj, jeśli masz problem z danym wyrazem/frazą</p>
+    <p class="normal-text small-margin"><span class="orange">prompt</span> - podpowiedź</p>
+    <p class="normal-text small-margin"><span class="orange">back</span> - wróć</p>
+    <p class="normal-text small-margin"><span class="orange">go to challange</span> - przejdź do wyzwania (danej lekcji)</p>
+    <p class="normal-text small-margin"><span class="orange">go to chat</span> - przejdź do czatu (danej lekcji)</p>
+  </div>
+  <div class="footer">
+
+  </div>
+
+</div>
+</html>

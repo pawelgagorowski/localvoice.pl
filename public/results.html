@@ -14,7 +14,7 @@
 
 <!-- Latest patch release (recommended for production) -->
 <script src="https://cdn.auth0.com/js/lock/11.x.y/lock.min.js"></script>
-<script type="module" src="../javascripts/results.js"></script>
+<script type="module" src="./javascripts/results.js"></script>
 <style>
 
   body {
@@ -37,6 +37,8 @@
   .list-group-item img {
     float: right;
     height: 93px;
+    width: 93px;
+    object-fit: cover;
     margin-top: -96px;
     border-radius: 50px;
   }
@@ -69,30 +71,57 @@
     margin-right: 20%;
   }
 
+  .month {
+    display: none;
+    padding-left: 20px;
+  }
+  .big-letters {
+    font-size: 23px;
+  }
+  .navbar-nav > li {
+    font-size: 19px
+  }
+  .dropdown {
+    padding-top: 0
+  }
+
+  .dropdown-toggle {
+    padding-top: 25px !important;
+    padding-bottom: 30px !important;
+  }
+  .nav.navbar-nav.navbar-right a {
+    padding-top: 25px !important;
+  }
+  .dropdown-menu > li > a {
+    padding: 14px 20px;
+  }
+
+
 
   @media (min-width: 768px) {
     .container-fluid>.navbar-header {
       width: 100%;
-      }
     }
 
-    @media (min-width: 768px) {
-      .winners-name {
-        font-size: 13px;
-        font-weight: bold;
-      }
+    .winners-name {
+      font-size: 13px;
+      font-weight: bold;
     }
-
+    .gift-image {
+      margin-right: 10%;
+    }
+  }
     @media (max-width: 768px) {
       .gift-image {
         margin-right: 32%;
       }
       .list-group-item img {
         height: 84px;
+        width: 84px;
+        object-fit: cover;
         margin-top: -88px;
       }
     }
-
     .color {
       background-color: lightblue !important;
     }
@@ -104,20 +133,27 @@
   <nav class="navbar navbar-inverse">
 <div class="container-fluid">
   <div class="navbar-header">
-    <img src="https://s3.eu-central-1.amazonaws.com/testers.localvoice.pl/local_voice_full_color.png" alt="">
+    <img src="https://s3.eu-central-1.amazonaws.com/testers.localvoice.pl/local_voice_full_color.png" alt="" class="navbar-left">
+    <ul class="nav navbar-nav month">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Miesiąc
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li ><a id="firstPosition">Wrzesień</a></li>
+          <li><a id="secondPosition">Październik</a></li>
+        </ul>
+      </li>
+    </ul>
     <ul class="nav navbar-nav navbar-right">
       <!-- <li> <a href="#" class="email-display"></a>sdfvsdfs</li> -->
       <li id="btn-login"><a href="#"><span class="glyphicon glyphicon-user"></span> Zaloguj się</a></li>
       <li id="btn-logout"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Wyloguj się</a></li>
     </ul>
   </div>
-
 </div>
 </nav>
 </div>
 <div class="container winners">
-  <h3>Pełna lista uczestników rywalizacji</h3>
-  <p>Pierwsze 10 osób każdego miesiąca otrzyma bilety do kina. Powodzenia!</p>
   <ul class="list-group">
   </ul>
 </div>
