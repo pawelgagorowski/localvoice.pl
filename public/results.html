@@ -17,8 +17,21 @@
 <script type="module" src="./javascripts/results.js"></script>
 <style>
 
-  body {
+  .content {
     overflow-x: hidden;
+  }
+
+  /* .my-content {
+    overflow-x: hidden;
+  } */
+
+  h3 {
+    margin-top: 4px !important;
+    margin-bottom: 32px !important;
+  }
+
+  .p-content {
+    margin-bottom: 30px !important;
   }
 
   .image {
@@ -75,12 +88,15 @@
     display: none;
     padding-left: 20px;
   }
+
   .big-letters {
-    font-size: 23px;
+    font-size: 18px;
   }
+
   .navbar-nav > li {
     font-size: 19px
   }
+
   .dropdown {
     padding-top: 0
   }
@@ -89,9 +105,11 @@
     padding-top: 25px !important;
     padding-bottom: 30px !important;
   }
+
   .nav.navbar-nav.navbar-right a {
     padding-top: 25px !important;
   }
+
   .dropdown-menu > li > a {
     padding: 14px 20px;
   }
@@ -107,13 +125,41 @@
       font-size: 13px;
       font-weight: bold;
     }
+    .navbar-header img {
+      float: left
+    }
     .gift-image {
       margin-right: 10%;
     }
   }
     @media (max-width: 768px) {
+
+      .p-content {
+        text-align: justify;
+      }
+
+      .nav.navbar-nav.navbar-right a {
+        padding-bottom: 21px !important;
+      }
+
       .gift-image {
         margin-right: 32%;
+      }
+
+      .open > a:focus {
+        background-color: #222 !important;
+      }
+      .navbar-header .month {
+        float: left
+      }
+
+      .navbar img {
+        margin: auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
       }
       .list-group-item img {
         height: 84px;
@@ -121,43 +167,72 @@
         object-fit: cover;
         margin-top: -88px;
       }
+
+      .navbar-header img {
+        height: 40px;
+      }
+
+      .dropdown-toggle {
+        display: inline-block !important
+      }
+
+      .dropdown-menu {
+        position: absolute !important;
+        background-color: #222 !important;
+        left: -6px;
+      }
+
+      .dropdown-menu li a {
+        padding: 20px !important;
+        cursor: pointer;
+      }
+
+      #firstPosition {
+        background-color: black;
+      }
+      img {
+        margin-top: -20px;
+      }
+
     }
     .color {
       background-color: lightblue !important;
     }
+    /* .navbar img {
+      margin: none;
+    } */
 
 
 
 </style>
-<div class="content">
-  <nav class="navbar navbar-inverse">
-<div class="container-fluid">
-  <div class="navbar-header">
-    <img src="https://s3.eu-central-1.amazonaws.com/testers.localvoice.pl/local_voice_full_color.png" alt="" class="navbar-left">
-    <ul class="nav navbar-nav month">
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Miesiąc
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li ><a id="firstPosition">Wrzesień</a></li>
-          <li><a id="secondPosition">Październik</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <!-- <li> <a href="#" class="email-display"></a>sdfvsdfs</li> -->
-      <li id="btn-login"><a href="#"><span class="glyphicon glyphicon-user"></span> Zaloguj się</a></li>
-      <li id="btn-logout"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Wyloguj się</a></li>
-    </ul>
+  <div class="content">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <img src="https://s3.eu-central-1.amazonaws.com/testers.localvoice.pl/local_voice_full_color.png" alt="">
+          <ul class="nav navbar-nav month">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Miesiąc
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li ><a id="firstPosition">Wrzesień</a></li>
+                <li><a id="secondPosition">Październik</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <!-- <li> <a href="#" class="email-display"></a>sdfvsdfs</li> -->
+            <li id="btn-login"><a href="#"><span id="span-login" class="glyphicon"></span> Zaloguj się</a></li>
+            <li id="btn-logout"><a href="#"><span id="span-logout" class="glyphicon"></span> Wyloguj się</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  <div class="container winners">
+    <ul class="list-group"></ul>
   </div>
-</div>
-</nav>
-</div>
-<div class="container winners">
-  <ul class="list-group">
-  </ul>
-</div>
-<div="image-container">
-  <img src="" alt="" class="image">
-</div>
+  <div class="image-container">
+    <img src="" alt="" class="image">
+  </div>
+  </div>
 </html>

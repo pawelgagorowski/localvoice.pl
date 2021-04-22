@@ -110,8 +110,6 @@ window.addEventListener('load', function() {
     $("#secondPosition").text(previousMonth);
   }
 
-  identifyMonth();
-
 
   var webAuth = new auth0.WebAuth({
     domain: 'dev-6cnet9rr.eu.auth0.com',
@@ -166,7 +164,6 @@ window.addEventListener('load', function() {
    function localLogin (authResult, callback) {
      // Set isLoggedIn flag in localStorage
      localStorage.setItem('isLoggedIn', 'true');
-
      localStorage.setItem('token', JSON.stringify(authResult));
      // Set the time that the Access Token will expire at
      expiresAt = JSON.stringify(
@@ -215,16 +212,21 @@ window.addEventListener('load', function() {
    }
 
    function displayButtons(email) {
+     console.log("displayButtons")
      if (isAuthenticated()) {
        loginBtn.style.display = 'none';
        logoutBtn.style.display = 'inline-block';
-       $month.css("display", "block")
+       identifyMonth();
+       $month.css("display", "inline-block")
        displayParagraphs(true)
      } else {
+       console.log("else")
        loginBtn.style.display = 'inline-block';
        logoutBtn.style.display = 'none';
-       $month.css("display", "none")
-       displayParagraphs(false)
+       $month.css("display", "none");
+       cleaning();
+       displayImageByLogin();
+       displayParagraphs(false);
      }
    }
 
@@ -236,41 +238,84 @@ window.addEventListener('load', function() {
   handleAuthentication();
   }
 
+  function displayImageByLogin() {
+    const media = window.matchMedia("(max-width: 800px)")
+    setImageByLogin(media)
+  }
+
+  function setImageByLogin(media) {
+    if (media.matches) {
+      $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/forntEndInformartions/login-on-site-first-mobile.png")
+    } else {
+      $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/forntEndInformartions/login-on-site-first.png")
+    }
+  }
+
   function displayImage (statusCode) {
     console.log("displayImage")
-    if(statusCode == 403) {
-      $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/pictures/dev/base+category/introduce+yourself/example-from-20.png")
+    const media = window.matchMedia("(max-width: 800px)")
+    setImage(media, statusCode)
+  }
+// https://english-project.s3.eu-central-1.amazonaws.com/forntEndInformartions/error-mobile.png
+  function setImage(media, statusCode) {
+    if (media.matches) {
+      if(statusCode == 406) {
+        $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/forntEndInformartions/no-one-on-list-mobile.png")
+      } else if(statusCode == 403) {
+        $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/forntEndInformartions/login-first-mobile.png")
+      } else {
+        $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/forntEndInformartions/error-mobile.png")
+      }
     } else {
-      $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/pictures/dev/base+category/introduce+yourself/example-from-20.png")
+      if(statusCode == 406) {
+        $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/forntEndInformartions/no-one-on-list.png")
+      } else if(statusCode == 403) {
+        $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/forntEndInformartions/login-first.png")
+      } else {
+        $('.image').attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/forntEndInformartions/error.png")
+      }
     }
   }
 
 
   function retrievingResults(email, month, idToken) {
-    const status = location.href.split("=")[1]
-    const env = (!status || status == "prod") ? "prod" : "test"
+    const url_string = window.location.href;
+    const url = new URL(url_string);
+    const env = url.searchParams.get("env") ? url.searchParams.get("env") : "test";
+    console.log(env);
+    const business = url.searchParams.get("business") ? url.searchParams.get("business") : "";
+    console.log(business);
+    const course = url.searchParams.get("course") ? url.searchParams.get("course") : "";
+    console.log(course);
+    console.log("month", month)
+    cleaning();
+    console.log("email", email);
+    $.ajax({
+      method: 'GET',
+      // url: `https://api.localvoice.pl/learn/results?env=${env}&month=${month}&business=${business}`,
+      url: `http://localhost:3000/test/results?env=${env}&month=${month}&business=${business}&course=${course}`,
+      headers: {
+        'Authorization': `${idToken}`,
+        'X-User': email,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        }
+    })
+    .done(resp => {
+      console.log("result");
+      console.log(resp);
+      sortingFunction(resp, month, email);
+    })
+    .catch(err => {
+      $userList.empty();
+      sortingFunction(resp, month, email);
+    })
+  }
+
+  function cleaning() {
+    $('.image').attr("src","")
     const $userList = $('.list-group');
-      $.ajax({
-        method: 'GET',
-        url: `https://api.localvoice.pl/learn/results?env=${env}&month=${month}`,
-        // url: `http://localhost:3000/test/results?env=${env}`,
-        headers: {
-          'Authorization': `${idToken}`,
-          'x-user': email,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-          }
-      })
-      .done(resp => {
-        $userList.empty();
-        console.log("result");
-        console.log(resp);
-        sortingFunction(resp, month, email);
-      })
-      .catch(err => {
-        $userList.empty();
-        sortingFunction(resp, month, email);
-      })
+    $userList.empty();
   }
 
   function displayParagraphs (boolean) {
@@ -319,7 +364,8 @@ window.addEventListener('load', function() {
 
         const p = document.createElement('p');
         $(p)
-        .html("Pierwsze <span class='big-letters'> 20% </span> osób każdego miesiąca otrzyma  <span class='big-letters'> bilety do kina/pizzę </span>. Pamiętaj, że laureaci poprzedniego miesiąca nie są tym razem brani pod uwagę przy rozdzielaniu nagród. Dajmy szansę innym :) Powodzenia!")
+        .addClass('p-content')
+        .html("Pierwsze <span class='big-letters'> 20% </span> osób każdego miesiąca otrzyma  <span class='big-letters'> bilety do kina/pizzę</span>. Pamiętaj, że laureaci poprzedniego miesiąca nie są tym razem brani pod uwagę przy rozdzielaniu nagród. Dajmy szansę innym :) Powodzenia!")
         .appendTo($userList)
 
         sortedUsers.forEach(function(item, i) {
@@ -364,7 +410,7 @@ window.addEventListener('load', function() {
               let giftImage = document.createElement("img");
               $(giftImage)
               .addClass('gift-image')
-              .attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/icons/gift.png")
+              .attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/icons/universal/gift.png")
               .appendTo(div)
             }
 
@@ -397,9 +443,8 @@ window.addEventListener('load', function() {
             if(i > 9 ) {
               j = j.charAt(1)
             }
-
             $(image)
-            .attr("src", item.picture ? item.picture : `https://d24xp1bilplfor.cloudfront.net/icons/${j}.png`)
+            .attr("src", (item.picture && item.picture.indexOf('photo.jpg') < 0) ? item.picture : `https://d24xp1bilplfor.cloudfront.net/icons/${j}.png`)
             .appendTo(div)
 
             const boolean = winners.every(function (el) {
@@ -409,7 +454,7 @@ window.addEventListener('load', function() {
               let giftImage = document.createElement("img");
               $(giftImage)
               .addClass('gift-image')
-              .attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/icons/gift.png")
+              .attr("src", "https://english-project.s3.eu-central-1.amazonaws.com/icons/universal/gift.png")
               .appendTo(div)
             }
           }
@@ -419,4 +464,21 @@ window.addEventListener('load', function() {
       console.log(e)
     }
   }
+
+
+  function removeIcon(x) {
+  if (x.matches) { // If media query matches
+    $("#span-login").addClass("glyphicon-user");
+    $("#span-logout").addClass("glyphicon-log-in");
+  } else {
+    $("#span-login").removeClass("glyphicon-user");
+    $("#span-logout").removeClass("glyphicon-log-in");
+    }
+  }
+
+  var x = window.matchMedia("(min-width: 800px)")
+  removeIcon(x) // Call listener function at run time
+  x.addListener(removeIcon) // Attach listener function on state changes
+
+
 });
